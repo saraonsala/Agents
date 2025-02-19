@@ -1,5 +1,9 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from crewai_tools import SerperDevTool
+from tools.decorators import before_kickoff, after_kickoff, callback, cache_handler
+from crewai.types import AgentConfig, TaskConfig
+
 
 # If you want to run a snippet of code before or after the crew starts, 
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -8,6 +12,16 @@ from crewai.project import CrewBase, agent, crew, task
 @CrewBase
 class LinaProject():
 	"""LinaProject crew"""
+ 
+	@before_kickoff
+	def before_kickoff_function(self, inputs):
+		print(f"Before kickoff function with inputs: {inputs}")
+		return inputs # You can return the inputs or modify them as needed
+
+	@after_kickoff
+	def after_kickoff_function(self, result):
+		print(f"After kickoff function with result: {result}")
+		return result # You can return the result or modify it as needed
 
 	# Learn more about YAML configuration files here:
 	# Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
@@ -20,8 +34,9 @@ class LinaProject():
 	@agent
 	def researcher(self) -> Agent:
 		return Agent(
-			config=self.agents_config['researcher'],
-			verbose=True
+		config=self.agents_config['researcher'],
+		verbose=True,
+		tools=[SerperDevTool()]
 		)
 
 	@agent
