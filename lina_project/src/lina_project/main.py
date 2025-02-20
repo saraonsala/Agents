@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 import sys
 import warnings
-
+from crewai import CrewBase, Agent, Task, Crew
 from datetime import datetime
 
-from lina_project.crew import LinaProject, CrewBase
-
+from crew import LinaProject
+from lina_project.llm import LLM, llm
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 # This main file is intended to be a way for you to run your
@@ -13,6 +13,12 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 
+def main():
+    """
+    Main function to run the crew.
+    """
+    run()
+    
 def run():
     """
     Run the crew.

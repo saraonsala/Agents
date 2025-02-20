@@ -1,15 +1,16 @@
-from crewai import Agent, Crew, Process, Task
-from crewai.project import CrewBase, agent, crew, task
+from crewai import crewbase
 from crewai_tools import SerperDevTool
+from crewai import crewBase, Agent, Task, Crew, Process
 from tools.decorators import before_kickoff, after_kickoff, callback, cache_handler
 from crewai.types import AgentConfig, TaskConfig
-
+from llm import LLM
+from crewai.project import crew, agent, crew, task
 
 # If you want to run a snippet of code before or after the crew starts, 
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
-@CrewBase
+@crewbase
 class LinaProject():
 	"""LinaProject crew"""
  

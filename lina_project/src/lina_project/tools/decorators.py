@@ -8,13 +8,12 @@ from crewai.project import CrewBase, agent, crew, task
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from crewai import CrewOutput
 from crewai.tools import BaseTool
 
 class decorators(BaseTool):
     name: str = "Decorators"
     description: str = "Decorators for CrewAI crews."
-    args_schema: Type[BaseModel] = None
+    #args_schema: Type[BaseModel] = None
 
     def _run(self, argument: str) -> str:
         return "Decorators for CrewAI crews."

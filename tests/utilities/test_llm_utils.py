@@ -9,15 +9,15 @@ from crewai.utilities.llm_utils import create_llm
 
 
 def test_create_llm_with_llm_instance():
-    existing_llm = LLM(model="gpt-4o")
+    existing_llm = LLM(model="llama-3-8b-instruct")
     llm = create_llm(llm_value=existing_llm)
     assert llm is existing_llm
 
 
 def test_create_llm_with_valid_model_string():
-    llm = create_llm(llm_value="gpt-4o")
+    llm = create_llm(llm_value="llama-3-8b-instruct")
     assert isinstance(llm, LLM)
-    assert llm.model == "gpt-4o"
+    assert llm.model == "llama-3-8b-instruct"
 
 
 def test_create_llm_with_invalid_model_string():
@@ -55,7 +55,7 @@ def test_create_llm_with_unknown_object():
     unknown_obj = UnknownObject()
     llm = create_llm(llm_value=unknown_obj)
     assert isinstance(llm, LLM)
-    assert llm.model == "gpt-4o"
+    assert llm.model == "llama-3-8b-instruct"
     assert llm.temperature == 0.7
     assert llm.max_tokens == 1500
 
@@ -72,7 +72,7 @@ def test_create_llm_from_env_with_unaccepted_attributes():
     ):
         llm = create_llm(llm_value=None)
         assert isinstance(llm, LLM)
-        assert llm.model == "gpt-3.5-turbo"
+        assert llm.model == "llama-3-8b-instruct"
         assert not hasattr(llm, "AWS_ACCESS_KEY_ID")
         assert not hasattr(llm, "AWS_SECRET_ACCESS_KEY")
         assert not hasattr(llm, "AWS_REGION_NAME")
@@ -80,13 +80,13 @@ def test_create_llm_from_env_with_unaccepted_attributes():
 
 def test_create_llm_with_partial_attributes():
     class PartialAttributes:
-        model_name = "gpt-4o"
+        model_name = "llama-3-8b-instruct"
         # temperature is missing
 
     obj = PartialAttributes()
     llm = create_llm(llm_value=obj)
     assert isinstance(llm, LLM)
-    assert llm.model == "gpt-4o"
+    assert llm.model == "llama-3-8b-instruct"
     assert llm.temperature is None  # Should handle missing attributes gracefully
 
 
