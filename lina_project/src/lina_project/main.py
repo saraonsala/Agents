@@ -4,7 +4,7 @@ import warnings
 
 from datetime import datetime
 
-from lina_project.crew import LinaProject
+from lina_project.crew import LinaProject, CrewBase
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
