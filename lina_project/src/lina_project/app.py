@@ -8,29 +8,26 @@ load_dotenv()
 USE_LM_STUDIO = True  # Ändra till False för att använda Ollama
 
 if USE_LM_STUDIO:
-    # Konfiguration för LM Studio
-    from embedchain.llm.openai import OpenAI
+    # Korrigerad import för nyare version av Embedchain
+    from embedchain.llm.openai import OpenAILlm
     
-    llm = OpenAI(
+    llm = OpenAILlm(
         api_key=os.getenv("OPENAI_API_KEY"),
         model="local-model",
         base_url="http://localhost:1234/v1"
     )
 else:
-    # Konfiguration för Ollama
     from embedchain.llm.ollama import Ollama
     llm = Ollama(model="mistral")
 
-# Skapa appen med lokal embedding-modell
+# Resten av koden förblir samma
 app = App(
     llm=llm,
     embedder="sentence-transformers/all-MiniLM-L6-v2"
 )
 
-# Lägg till data
-app.add("data.txt")  # Skapa denna fil i samma mapp
+app.add("data.txt")
 
-# Kör chatten
 while True:
     query = input("\nAnge din fråga (eller 'avsluta'): ")
     if query.lower() == "avsluta":
