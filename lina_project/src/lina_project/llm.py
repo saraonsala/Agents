@@ -1,4 +1,8 @@
 from crewai import LLM
+from langchain_ollama import OllamaLLM
+
+model = OllamaLLM(model="llama3")
+model.invoke("Come up with 10 names for a song about parrots")
 
 # Konfiguration för att ansluta CrewAI till LM Studio
 llm = LLM(
